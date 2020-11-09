@@ -42,7 +42,7 @@ void solved() {
     if (ans.size() <= 2) {
         cout << ans.size() << endl;
         for (auto i : ans) {
-            cout << i.first << " " << i.second << "\n";
+            cout << i.first + 1 << " " << i.second + 1 << "\n";
         }
         return;
     }
@@ -54,7 +54,7 @@ void solved() {
     if (ans.size() <= 2) {
         cout << ans.size() << endl;
         for (auto i : ans) {
-            cout << i.first << " " << i.second << "\n";
+            cout << i.first + 1 << " " << i.second + 1<< "\n";
         }
         return;
     }
