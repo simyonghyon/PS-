@@ -5,5 +5,11 @@
         "xlocale": "cpp",
         "xstring": "cpp",
         "string": "cpp"
+    },
+    "files.exclude": {
+        "**/.classpath": true,
+        "**/.project": true,
+        "**/.settings": true,
+        "**/.factorypath": true
     }
 }
