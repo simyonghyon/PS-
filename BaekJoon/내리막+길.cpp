@@ -21,36 +21,40 @@ typedef  long long ll;
 int dx[] = { 1, 0, -1, 0 };
 int dy[] = { 0, 1, 0, -1 };
 
+int N, M;
+
+int dfs(int y, int x, vector<vector<int>>& a, vector<vector<int>>& check) {
+    
+    if (check[y][x] != -1) return check[y][x];
+    if (y == N - 1 && x == M - 1) return 1;
+
+    check[y][x] = 0;
+    for (int i = 0; i < 4; i++) {
+        int nx = x + dx[i];
+        int ny = y + dy[i];
+
+        if (0 <= nx && nx < M && 0 <= ny && ny < N) {
+            if (a[ny][nx] < a[y][x]) check[y][x] += dfs(ny, nx, a, check);
+        }
+    }
+    return check[y][x];
+}
     
 void solve() {
     IOS;
     int n, m;
     cin >> n >> m;
+    N = n;
+    M = m;
+    vector<vector<int>> check(n, vector<int>(m, -1));
     vector<vector<int>> a(n, vector<int>(m));
 
     For(i, n)
         For(k, m)
         cin >> a[i][k];
-
-    queue<pair<pair<int, int>, int>> q;
-    q.push(make_pair(make_pair(0, 0), a[0][0]));
-    int answer = 0;
-
-    while (!q.empty()) {
-        int y = q.front().first.first;
-        int x = q.front().first.second;
-        int height = q.front().second;
-        q.pop();
-        if (y == n - 1 && x == m - 1) answer++;
-        for (int i = 0; i < 4; i++) {
-            int nx = x + dx[i];
-            int ny = y + dy[i];
-
-            if (0 <= nx && nx < m && 0 <= ny && ny < n) {
-                if (a[ny][nx] < height) q.push(make_pair(make_pair(ny, nx), a[ny][nx]));
-            }
-        }
-    }
+   
+    int answer = dfs(0, 0, a, check);
+ 
     cout << answer << endl;
 }
 
