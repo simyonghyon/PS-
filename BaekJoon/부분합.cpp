@@ -1,4 +1,4 @@
-//https://www.acmicpc.net/problem/2493
+//https://www.acmicpc.net/problem/1806
 
 #include <iostream> 
 #include <vector>
@@ -31,29 +31,29 @@ int hy[] = { -1, -2, -2, -1, 1, 2, 2, 1 };
 
 void solve() {
     IOS;
-    int n;
-    cin >> n;
-    vector<int> a(n);
-
+    int n, m;
+    cin >> n >> m;
+    vector<int> a(n, 0);
     For(i, n) cin >> a[i];
 
-    priority_queue<P, vector<P>, greater<P>> lager;
+    int sum = 0;
+    int l = 0;
+    int length = 0;
+    int ans = 1000000;
 
-    vector<int> ans(n, 0);
+    For(i, n) {
+        sum += a[i];
+        length += 1;
 
-    for (int i = n - 1; i >= 0; i--) {
-
-        while (!lager.empty()) {
-            auto k = lager.top();
-            if (k.first <= a[i]) {
-                ans[k.second] = i + 1;
-                lager.pop();
+        if (sum >= m) {
+            while (sum - a[l] >= m) {
+                sum -= a[l];
+                l++;
+                length--;
             }
-            else break;
+            ans = min(ans, length);
         }
-
-        lager.push(P(a[i], i));
     }
-
-    for (auto k : ans) cout << k << " ";
+    ans = ans == 1000000 ? 0 : ans;
+    cout << ans;
 }
