@@ -31,21 +31,6 @@ int hx[] = { 2, 1, -1, -2, -2, -1, 1, 2 };
 int hy[] = { -1, -2, -2, -1, 1, 2, 2, 1 };
 
 
-vector<int> getPrime(int n) {
-    vector<int> prime;
-
-    vector<bool> check(n + 1, false);
-    
-    for (int i = 2; i <= n; i++) {
-        if (!check[i]) {
-            prime.push_back(i);
-            for (int k = i; k <= n; k += i) check[k] = true;
-        }
-    }
-
-    return prime;
-}
-
 void solve() {
     IOS;
     int n, m;

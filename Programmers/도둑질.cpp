@@ -63,7 +63,7 @@ int solution(vector<int> money) {
     return ans;
 }
 
-//dp가 2차원일 필요가 없다는 사실을 깨닫고 이렇게 바꿔주었다... 
+//dp가 2차원일 필요가 없다는 사실을 깨닫고 이렇게 바꿔주었다.
 //솔직히 훨신 깔끔하기는 하지만 크게 차이는 안나는거 같은데 너무 시간복잡도가 빡빡한 것 같다..
 int solution(vector<int> money) {
     vector<int> dpo(money.size());
