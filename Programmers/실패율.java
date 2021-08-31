@@ -58,10 +58,6 @@ class Stage implements Comparable<Stage>{
     
     @Override
     public int compareTo(Stage stage){
-        if(Double.compare(stage.getFail(), this.getFail()) == 0){
-            return Integer.compare(this.index, stage.index);
-        } else {
-            return Double.compare(this.getFail(), stage.getFail());
-        }
+        return Double.compare(this.getFail(), stage.getFail());
     }
 }
