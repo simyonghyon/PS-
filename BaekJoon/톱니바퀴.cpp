@@ -1,7 +1,7 @@
-#include <iostream>
-#include <vector>
 //https://www.acmicpc.net/problem/14891
 
+#include <iostream>
+#include <vector>
 #include <algorithm>
 #include <string>
 #include <queue>
@@ -57,7 +57,6 @@ public:
             s[0] = c;
         }
 
-        //rotateLR(direction);
     }
 
 
