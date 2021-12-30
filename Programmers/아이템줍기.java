@@ -67,15 +67,13 @@ class Solution {
 class Pair{
     int x, y;
     int cost = 0;
-    public Pair(int y, int x, int cost) {
-        this.x = x;
-        this.y = y;
-        this.cost = cost;
-    }
 
-    Pair(){}
 
     public static Pair of(int y, int x, int cost){
-        return new Pair(y, x, cost);
+        Pair pair = new Pair();
+        pair.x = x;
+        pair.y = y;
+        pair.cost = cost;
+        return pair;
     }
 }
