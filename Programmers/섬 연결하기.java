@@ -1,3 +1,6 @@
+// https://programmers.co.kr/learn/courses/30/lessons/42861
+// 전형적인 union-find 문제였다. 오랜만에 쉬운거 푸니까 편-안 하다
+
 class Solution {
     private int[] dx = {1, 0, -1, 0};
     private int[] dy = {0, 1, 0, -1};
