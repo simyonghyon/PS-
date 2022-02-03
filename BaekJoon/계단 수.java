@@ -1,3 +1,6 @@
+// https://www.acmicpc.net/problem/1562
+// 나는 외판원 순회 생각하며 풀었지만 아래서부터 전부 세가며 푸는 것이 더 간단하겠다
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
