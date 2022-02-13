@@ -51,77 +51,36 @@ class Solve {
     public void solve() throws IOException {
         int n = Integer.valueOf(br.readLine());
 
-        List<Node> nodes = new ArrayList<>();
-
-        Node[] node1 = new Node[n];
+        Node[] nodes = new Node[n];
         for(int i = 0; i < n; i++){
             StringTokenizer st = new StringTokenizer(br.readLine(), " ");
             int start = Integer.valueOf(st.nextToken());
             int end = Integer.valueOf(st.nextToken());
-            node1[i] = new Node(Math.min(start, end), Math.max(end, start));
+            nodes[i] = new Node(Math.min(start, end), Math.max(end, start));
             //nodes.add(new Node(Math.min(start, end), Math.max(end, start)));
         }
 
         final int scope = Integer.valueOf(br.readLine());
 
-
-        for(int i = 0; i < n; i++){
-            if(node1[i].end - node1[i].start <= scope) nodes.add(node1[i]);
-        }
-
-        nodes.sort(Comparator.comparingInt(Node::getStart));
+        Arrays.sort(nodes, Comparator.comparingInt(Node::getEnd).thenComparing(Node::getEnd));
 
         //nodes.forEach(node->System.out.println(node.getStart() + " " + node.getEnd()));
-        PriorityQueue<Node> notInclude = new PriorityQueue<>(Comparator.comparingInt(Node::getEnd));
+        PriorityQueue<Node> pq = new PriorityQueue<>(Comparator.comparingInt(Node::getStart));
 
         int answer = 0;
-        int searchIndex = 0;
-        int count = 0;
-        for(int i = 0; i < nodes.size(); i++){
-            int start = nodes.get(i).getStart();
-            int end = start + scope;
 
-            if(i > 0){
-                if(nodes.get(i - 1).start == nodes.get(i).start){
-                    count--;
-                    continue;
-                }
+        for(int i = 0; i < nodes.length; i++){
+            int end = nodes[i].getEnd();
+            int start = end - scope;
+
+            pq.add(nodes[i]);
+
+            while(!pq.isEmpty()){
+                if(pq.peek().start >= start) break;
+                pq.poll();
             }
 
-            while(!notInclude.isEmpty()){
-                if(notInclude.peek().start < start) {
-                    notInclude.poll();
-                    continue;
-                }
-
-                if(notInclude.peek().end > end) break;
-                else {
-                    notInclude.poll();
-                    count++;
-                }
-            }
-            /*
-            for(int k = notInclude.size() - 1; k >= 0; k--){
-                if(notInclude.get(k).)
-                if(notInclude.get(k).end > end) break;
-                else {
-                    notInclude.remove(k);
-                    count++;
-                }
-            }*/
-
-            while(searchIndex < nodes.size() && nodes.get(searchIndex).start <= end){
-                if(nodes.get(searchIndex).end <= end){
-                    count++;
-
-                } else{
-                    notInclude.add(nodes.get(searchIndex));
-                }
-                searchIndex++;
-            }
-
-            answer = Math.max(count, answer);
-            count--;
+            answer = Math.max(pq.size(), answer);
         }
 
         System.out.println(answer);
