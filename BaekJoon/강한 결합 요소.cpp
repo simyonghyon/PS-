@@ -1,3 +1,5 @@
+//https://www.acmicpc.net/problem/2150
+//강한 결합 요소와 관련된 기본 문제이다. 이런 것까지 알아야 할까..??
 #include<cstdio>
 #include<vector>
 #include<stack>
