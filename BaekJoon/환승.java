@@ -1,4 +1,4 @@
-package com.company;
+// https://www.acmicpc.net/problem/5214
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
