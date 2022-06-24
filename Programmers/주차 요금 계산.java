@@ -1,4 +1,4 @@
-//https://programmers.co.kr/learn/courses/30/lessons/92341
+//https://programmers.co.kr/learn/courses/30/lessons/92341s
 import java.util.*;
 import java.util.stream.Collectors;
 
