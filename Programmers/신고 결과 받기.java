@@ -5,7 +5,7 @@ class Solution {
     public int[] solution(String[] id_list, String[] report, int k) {
         int[] answer = new int[id_list.length];
         
-        CustomHashMap idToIndex = new CustomHashMap(id_list.length * 2);
+        CustomHashMap<String, Integer> idToIndex = new CustomHashMap<>(id_list.length * 2);
         //Map<String, Integer> idToIndex = new HashMap<>();
         
         for(int i = 0; i < id_list.length; i++){
@@ -45,7 +45,7 @@ class Solution {
 }
 
 
-class CustomHashMap {
+class CustomHashMap<K, V> {
     private Node[] map;
     private int size;
     private int remainSize;
@@ -54,18 +54,19 @@ class CustomHashMap {
         map = new Node[size];
         this.size = size;
         this.remainSize = size;
+        for(int i = 0; i < size; i++){
+            map[i] = null;
+        }
     }
 
     public CustomHashMap(){
         this(10);
     }
 
-    public void put(String key, Integer value){
+    public void put(K key, V value){
         int index = (key.hashCode() < 0 ? key.hashCode() * -1 : key.hashCode()) % size;
-        //System.out.println(key + " " + index);
-        
         Node changeNode = new Node(index, key, value);
-        
+
         if(map[index] != null){
             Node prev = new Node(-1, key, value);
             Node node = map[index];
@@ -73,40 +74,40 @@ class CustomHashMap {
                 prev = node;
                 node = node.next;
             }
-            
+
             prev.next = changeNode;
             if(node != null){
                 changeNode.next = node.next;
             }
-        
+
         } else {
             map[index] = new Node(index, key, value);
         }
+
+        remainSize -= 1;
     }
-    
-    public int get(String key){
+
+    public V get(K key){
         int index = (key.hashCode() < 0 ? key.hashCode() * -1 : key.hashCode()) % size;
-        //System.out.print(key + " " + index);
         Node node = map[index];
-        
+
         while(node != null) {
-            //System.out.println(" " + node.key + " " + key);
             if(node.key.equals(key)){
-                return node.value;
+                return (V)node.value;
             }
             node = node.next;
         }
-        
-        return -1;
+
+        return null;
     }
 
-    class Node{
+    class Node<K, V>{
         final int hash;
-        String key;
-        int value;
-        Node next = null;
-        
-        Node(int hash, String key, int value){
+        K key;
+        V value;
+        Node<K, V> next = null;
+
+        Node(int hash, K key, V value){
             this.hash = hash;
             this.key = key;
             this.value = value;
